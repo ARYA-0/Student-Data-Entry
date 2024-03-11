@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+void rsearch(int no);
+void nsearch(int no);
+void displayall(int no);
+void choice(int no);
+struct student
+{
+    char name[69], grade[6];
+    long int rollno;
+}s[200];
+int main() 
+{
+    int n,i;
+    printf("Enter the number of students:\n");
+    scanf("%d",&n);
+    printf("\n");
+    for(i=0;i<n;i++){
+        printf("Enter Roll Number: ");
+        scanf("%ld",&s[i].rollno);
+        printf("Enter Name: ");
+        scanf("%s",s[i].name);
+        printf("Enter Grade: ");
+        scanf("%s",s[i].grade);
+        printf("\n\n");
+    }
+    printf("\n\n");
+    displayall(n);
+    choice(n);
+    return 0;
+}
+void choice(int no)
+{
+    printf("\nChoose your option:\n1.Search for student details\n2.Display all\n3.Exit\n\n");
+    int ch;
+    scanf("%d",&ch);
+ 
+    if(ch==1)
+    {
+        printf("Search by:\n1.Name\n2.Roll Number\n");
+        int chh;
+        scanf("%d",&chh);
+        printf("\n");
+        if(chh==1)
+        {
+            nsearch(no);
+            choice(no);
+        }
+        else if(chh==2)
+        {    
+            rsearch(no);
+            choice(no);
+        }
+        else
+            printf("Invalid\n");
+    }
+    else if(ch==2)
+    {    
+        displayall(no);
+        choice(no);
+    }
+    else if(ch==3)
+        printf("Thank You\n");
+    else
+        printf("Invalid\n");
+}
+void nsearch(int no)
+{
+    char tname[69];
+    int j;
+    printf("Enter the name to be searched: ");
+    scanf("%s",tname);
+    printf("\n");
+    for(j=0;j<no;j++)
+    {
+        if(strcmp(s[j].name,tname)==0)
+        {
+            printf("Roll Number:%ld\nName:%s\nGrade:%s\n\n",s[j].rollno,s[j].name,s[j].grade);
+            break;
+        }        
+    }
+}
+void rsearch(int no)
+{
+    long int troll;
+    int j=0;
+    printf("Enter the roll number to be searched: ");
+    scanf("%ld",&troll);
+    while(j<no){
+        if(s[j].rollno==troll){
+            printf("Roll Number:%ld\nName:%s\nGrade:%s\n\n",s[j].rollno,s[j].name,s[j].grade);
+        }        
+        j++;
+    }
+}
+void displayall(int no)
+{
+    int j;
+    for(j=0;j<no;j++)
+    {
+        printf("\nRoll Number:%ld\nName:%s\nGrade:%s\n",s[j].rollno,s[j].name,s[j].grade);
+    }
+}
